@@ -40,9 +40,10 @@ const MAX_TOTAL_SIZE = 500 * 1024; // 500KB total limit
 interface GitCloneButtonProps {
   className?: string;
   importChat?: (description: string, messages: Message[], metadata?: IChatMetadata) => Promise<void>;
+  iconOnly?: boolean;
 }
 
-export default function GitCloneButton({ importChat, className }: GitCloneButtonProps) {
+export default function GitCloneButton({ importChat, className, iconOnly = false }: GitCloneButtonProps) {
   const { ready, gitClone } = useGit();
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -164,14 +165,14 @@ ${escapeBoltTags(file.content)}
           'text-bolt-elements-textPrimary',
           'hover:bg-bolt-elements-background-depth-2',
           'border border-bolt-elements-borderColor',
-          'h-10 px-4 py-2 min-w-[120px] justify-center',
+          `h-10 ${iconOnly ? 'aspect-square p-0 justify-center' : 'px-4 py-2 min-w-[120px] justify-center'}`,
           'transition-all duration-200 ease-in-out',
           className,
         )}
         disabled={!ready || loading}
       >
         <span className="i-ph:git-branch w-4 h-4" />
-        Clone a Git Repo
+        {!iconOnly && 'Clone a Git Repo'}
       </Button>
 
       <RepositorySelectionDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onSelect={handleClone} />

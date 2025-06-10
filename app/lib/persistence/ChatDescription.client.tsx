@@ -48,15 +48,18 @@ export function ChatDescription() {
         <>
           {currentDescription}
           <TooltipProvider>
-            <WithTooltip tooltip="Rename chat">
+            <WithTooltip tooltip="Rename project">
               <button
                 type="button"
-                className="ml-2 i-ph:pencil-fill scale-110 hover:text-bolt-elements-item-contentAccent"
+                className="ml-2 p-1.5 rounded-md hover:bg-bolt-elements-item-backgroundHover transition-colors duration-200 text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary"
                 onClick={(event) => {
                   event.preventDefault();
                   toggleEditMode();
                 }}
-              />
+                aria-label="Rename project"
+              >
+                <div className="i-ph:pencil-simple text-base" />
+              </button>
             </WithTooltip>
           </TooltipProvider>
         </>
